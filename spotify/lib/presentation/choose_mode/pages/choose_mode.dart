@@ -7,6 +7,7 @@ import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/presentation/auth/pages/signup_or_signin.dart';
 import 'package:spotify/presentation/choose_mode/bloc/theme_cubit.dart';
 
 class ChooseModePage extends StatelessWidget {
@@ -108,7 +109,7 @@ class ChooseModePage extends StatelessWidget {
                 BassicAppBottom(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => const ChooseModePage()));
+                          builder: (_) => const SignUpORSignInPage()));
                     },
                     title: "Continue"),
                 const SizedBox(
