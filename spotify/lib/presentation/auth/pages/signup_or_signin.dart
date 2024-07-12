@@ -8,6 +8,8 @@ import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/presentation/auth/pages/login.dart';
+import 'package:spotify/presentation/auth/pages/signup.dart';
 
 class SignUpORSignInPage extends StatelessWidget {
   const SignUpORSignInPage({super.key});
@@ -81,7 +83,11 @@ class SignUpORSignInPage extends StatelessWidget {
                           children: [ 
                             Expanded( 
                               flex: 1,
-                              child: BassicAppBottom(onPressed: (){}, title: "Register"),
+                              child: BassicAppBottom(onPressed: (){
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_)=>const SignUpPage())
+                                  );
+                              }, title: "Register"),
                             ),
                             const SizedBox(width: 20,),
                             Expanded(
@@ -91,7 +97,9 @@ class SignUpORSignInPage extends StatelessWidget {
                                   // minimumSize: MaterialStateProperty.resolveWith((states) => size.(states) => 
                                 ),
                                 onPressed: () {
-
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_)=>const LoginPage())
+                                  );
                                   
                                 },
                                 child: Text("Sign in",

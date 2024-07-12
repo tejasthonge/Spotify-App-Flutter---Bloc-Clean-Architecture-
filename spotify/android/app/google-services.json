@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "376382809394",
+    "project_id": "spotiy-clone-flutter-bloc",
+    "storage_bucket": "spotiy-clone-flutter-bloc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376382809394:android:095c82e82c729d2b8a232b",
+        "android_client_info": {
+          "package_name": "com.example.spotify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlqYiVYKxO_Kl85VGuT6N4nn895w1YLas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
