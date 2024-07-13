@@ -85,7 +85,7 @@ class SignUpORSignInPage extends StatelessWidget {
                               flex: 1,
                               child: BassicAppBottom(onPressed: (){
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_)=>const SignUpPage())
+                                    MaterialPageRoute(builder: (_)=> SignUpPage())
                                   );
                               }, title: "Register"),
                             ),

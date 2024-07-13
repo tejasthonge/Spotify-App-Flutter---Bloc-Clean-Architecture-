@@ -1,13 +1,22 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/apbar/app_bar.dart';
 import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/data/models/auth/create_user_req.dart';
+import 'package:spotify/domain/usecases/auth/signUpusecase.dart';
 import 'package:spotify/presentation/auth/pages/login.dart';
+import 'package:spotify/presentation/root/pages/root.dart';
+import 'package:spotify/service_locator.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
+
+  final TextEditingController _fullNameTEC = TextEditingController();
+  final TextEditingController _emailTEC = TextEditingController();
+  final TextEditingController _passwordTEC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +36,35 @@ class SignUpPage extends StatelessWidget {
             _fullNameFieldWidget(),
             _emailFieldWidget(),
             _passwordFieldWidget(),
-            const SizedBox(height: 20,),
-            BassicAppBottom(onPressed: (){}, title: "creat account"),
+            const SizedBox(
+              height: 20,
+            ),
+            BassicAppBottom(
+                onPressed: () async {
+                  var risult =  await sl<SignupUsecase>().call(
+                      params: CreateUserReqModel(
+                          fullName: _emailTEC.text.trim(),
+                          email: _emailTEC.text.trim(),
+                          password: _passwordTEC.text.trim()));
+
+                  risult.fold(
+                    (l) {
+                       ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(l),
+                    ),
+                  );
+                    }, 
+                    (r) {
+
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (_)=>const RootPage())
+                          , (route) => false);
+                    }
+                    
+                     );
+                },
+                title: "creat account"),
             Spacer(),
             _bottomSigninText(context: context)
           ],
@@ -73,6 +109,7 @@ class SignUpPage extends StatelessWidget {
             // border: Border.all(color: AppColors.grey)
             ),
         child: TextFormField(
+          controller: _fullNameTEC,
           decoration: InputDecoration(hintText: "Full Name"),
         ));
   }
@@ -80,73 +117,54 @@ class SignUpPage extends StatelessWidget {
   Widget _emailFieldWidget() {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
-
         height: 80,
         decoration: BoxDecoration(
 
             // border: Border.all(color: AppColors.grey)
             ),
         child: TextFormField(
+          controller: _emailTEC,
           decoration: InputDecoration(hintText: "Enter Email"),
         ));
   }
 
-   Widget _passwordFieldWidget() {
+  Widget _passwordFieldWidget() {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 10),
-
         height: 80,
         decoration: BoxDecoration(
 
             // border: Border.all(color: AppColors.grey)
             ),
         child: TextFormField(
-          decoration: InputDecoration(hintText: "Password",
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: IconButton( 
-                onPressed: (){
-              
-                },
-                icon: Icon(
-                  true?
-                  Icons.visibility_off:
-                  Icons.visibility 
-                  
-                  ),
-              ),
-            )
-          ),
-          
-        )
-        
-        );
+          controller: _passwordTEC,
+          decoration: InputDecoration(
+              hintText: "Password",
+              suffixIcon: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(true ? Icons.visibility_off : Icons.visibility),
+                ),
+              )),
+        ));
   }
 
-  Widget _bottomSigninText({required BuildContext context}){
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-
-          Text("Do you have an account? ",
-            style: TextStyle( 
-              fontWeight: FontWeight.w500,
-              fontSize: 14
-            ),    
-        ),
-
-        TextButton(onPressed: (){
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_)=>const LoginPage())
-          );
-        }, child: Text( 
-          "sign in",
-           style: TextStyle( 
-              fontWeight: FontWeight.w500,
-              fontSize: 14
-            ),    
-        ))
-      ]);
+  Widget _bottomSigninText({required BuildContext context}) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(
+        "Do you have an account? ",
+        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+      ),
+      TextButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const LoginPage()));
+          },
+          child: Text(
+            "sign in",
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+          ))
+    ]);
   }
 }
