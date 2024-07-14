@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit,ThemeMode>(
         builder: (context ,mode) {
           return MaterialApp(
+            builder: EasyLoading.init(),
             title: 'Flutter Demo',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
           );
         }
       ),
+
+      
     );
   }
 }

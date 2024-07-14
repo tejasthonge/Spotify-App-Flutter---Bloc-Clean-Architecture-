@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/apbar/app_bar.dart';
 import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
@@ -37,6 +38,7 @@ class LoginPage extends StatelessWidget {
             _passwordFieldWidget(),
             const SizedBox(height: 20,),
             BassicAppBottom(onPressed: ()async{
+                  EasyLoading.show(status: "Please wait till checking the user in Database");
               
              var risult = await  sl<SigninUsecase>().call(
               params: SigninUserReqModel(email: _emailTEC.text.trim(), password: _passwordTEC.text.trim())
@@ -52,8 +54,12 @@ class LoginPage extends StatelessWidget {
               
                   )
                 );
+                 EasyLoading.showError("Your Data is not available or Your Password is not correct");
+                  EasyLoading.dismiss();
               },
              (r) {
+                   EasyLoading.showSuccess("Welcome back\n Jay Shree Ram");
+                  EasyLoading.dismiss();
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_)=>const RootPage())
                   , (route) => false);

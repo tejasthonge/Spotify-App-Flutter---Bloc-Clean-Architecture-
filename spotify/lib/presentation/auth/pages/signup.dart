@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/apbar/app_bar.dart';
 import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
@@ -41,6 +42,7 @@ class SignUpPage extends StatelessWidget {
             ),
             BassicAppBottom(
                 onPressed: () async {
+                  EasyLoading.show(status: "Please wait till Data is upload in database");
                   var risult =  await sl<SignupUsecase>().call(
                       params: CreateUserReqModel(
                           fullName: _fullNameTEC.text.trim(),
@@ -53,10 +55,15 @@ class SignUpPage extends StatelessWidget {
                     SnackBar(
                       content: Text(l),
                     ),
+                    
                   );
+                  EasyLoading.showError("Failed to Create Account");
+                  EasyLoading.dismiss();
                     }, 
                     (r) {
-      
+                        EasyLoading.showSuccess("Account successfully Created");
+                  EasyLoading.dismiss();
+
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (_)=>const RootPage())
                           , (route) => false);
