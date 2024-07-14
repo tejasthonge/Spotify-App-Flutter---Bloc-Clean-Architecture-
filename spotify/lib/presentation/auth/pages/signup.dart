@@ -6,7 +6,7 @@ import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/data/models/auth/create_user_req.dart';
-import 'package:spotify/domain/usecases/auth/signUpusecase.dart';
+import 'package:spotify/domain/usecases/auth/signup_usecase.dart';
 import 'package:spotify/presentation/auth/pages/login.dart';
 import 'package:spotify/presentation/root/pages/root.dart';
 import 'package:spotify/service_locator.dart';
@@ -30,7 +30,7 @@ class SignUpPage extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.all(40),
         width: double.infinity,
-        child: Column(
+        child: ListView(
           children: [
             _registerWidget(),
             _fullNameFieldWidget(),
@@ -46,7 +46,7 @@ class SignUpPage extends StatelessWidget {
                           fullName: _emailTEC.text.trim(),
                           email: _emailTEC.text.trim(),
                           password: _passwordTEC.text.trim()));
-
+      
                   risult.fold(
                     (l) {
                        ScaffoldMessenger.of(context).showSnackBar(
@@ -56,7 +56,7 @@ class SignUpPage extends StatelessWidget {
                   );
                     }, 
                     (r) {
-
+      
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (_)=>const RootPage())
                           , (route) => false);
@@ -65,7 +65,7 @@ class SignUpPage extends StatelessWidget {
                      );
                 },
                 title: "creat account"),
-            Spacer(),
+              const SizedBox(height:150,),
             _bottomSigninText(context: context)
           ],
         ),
@@ -159,7 +159,7 @@ class SignUpPage extends StatelessWidget {
       TextButton(
           onPressed: () {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const LoginPage()));
+                MaterialPageRoute(builder: (_) => LoginPage()));
           },
           child: Text(
             "sign in",

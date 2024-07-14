@@ -94,11 +94,10 @@ class SignUpORSignInPage extends StatelessWidget {
                               flex: 1, 
                               child: TextButton(
                                 style: ButtonStyle( 
-                                  // minimumSize: MaterialStateProperty.resolveWith((states) => size.(states) => 
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (_)=>const LoginPage())
+                                    MaterialPageRoute(builder: (_)=> LoginPage())
                                   );
                                   
                                 },

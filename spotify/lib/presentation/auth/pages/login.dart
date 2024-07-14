@@ -1,14 +1,23 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/apbar/app_bar.dart';
 import 'package:spotify/common/widgets/bottom/bassic_app_bottom.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/data/models/auth/sigin_user_req.dart';
+import 'package:spotify/domain/usecases/auth/signin_usecase.dart';
 import 'package:spotify/presentation/auth/pages/signup.dart';
+import 'package:spotify/presentation/root/pages/root.dart';
+import 'package:spotify/service_locator.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+   LoginPage({super.key});
 
+
+  final TextEditingController _emailTEC = TextEditingController();
+  final TextEditingController _passwordTEC = TextEditingController();
   @override
  Widget build(BuildContext context) {
     return Scaffold(
@@ -21,14 +30,36 @@ class LoginPage extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.all(40),
         width: double.infinity,
-        child: Column(
+        child: ListView(
           children: [
             _loginWidget(),
             _emailFieldWidget(),
             _passwordFieldWidget(),
             const SizedBox(height: 20,),
-            BassicAppBottom(onPressed: (){}, title: "Sign In"),
-            Spacer(),
+            BassicAppBottom(onPressed: ()async{
+              
+             var risult = await  sl<SigninUsecase>().call(
+              params: SigninUserReqModel(email: _emailTEC.text.trim(), password: _passwordTEC.text.trim())
+             );
+              
+            risult.fold(
+              
+              (l) {
+              
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar( 
+                    content: Text(l),
+              
+                  )
+                );
+              },
+             (r) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_)=>const RootPage())
+                  , (route) => false);
+             });
+            }, title: "Sign In"),
+            const SizedBox(height: 240,),
             _bottomSignUpText(context: context)
           ],
         ),
@@ -83,9 +114,10 @@ class LoginPage extends StatelessWidget {
         height: 80,
         decoration: BoxDecoration(
 
-            // border: Border.all(color: AppColors.grey)
+
             ),
         child: TextFormField(
+          controller: _emailTEC,
           decoration: InputDecoration(hintText: "Enter Email"),
         ));
   }
@@ -100,6 +132,7 @@ class LoginPage extends StatelessWidget {
             // border: Border.all(color: AppColors.grey)
             ),
         child: TextFormField(
+          controller: _passwordTEC,
           decoration: InputDecoration(hintText: "Password",
             suffixIcon: Padding(
               padding: const EdgeInsets.only(right: 10.0),
