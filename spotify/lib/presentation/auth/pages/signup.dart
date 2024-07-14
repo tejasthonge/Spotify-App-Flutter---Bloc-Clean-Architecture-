@@ -43,7 +43,7 @@ class SignUpPage extends StatelessWidget {
                 onPressed: () async {
                   var risult =  await sl<SignupUsecase>().call(
                       params: CreateUserReqModel(
-                          fullName: _emailTEC.text.trim(),
+                          fullName: _fullNameTEC.text.trim(),
                           email: _emailTEC.text.trim(),
                           password: _passwordTEC.text.trim()));
       
