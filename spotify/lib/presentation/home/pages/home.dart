@@ -1,6 +1,6 @@
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/helpers/is_dark_mode.dart';
@@ -8,6 +8,8 @@ import 'package:spotify/common/widgets/apbar/app_bar.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/presentation/home/widgets/new_songs.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,10 +26,9 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     _tabContrllere = TabController(
-        vsync: this,//for the vsync we requider the this but we base this it get error so we have to child of or state class with the SingleTickerProviderStateMixin due to that we get this
-        length:
-            4
-    ); 
+        vsync:
+            this, //for the vsync we requider the this but we base this it get error so we have to child of or state class with the SingleTickerProviderStateMixin due to that we get this
+        length: 4);
   }
 
   @override
@@ -46,7 +47,24 @@ class _HomePageState extends State<HomePage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: ,
-            children: [_homeArtistsCard(context: context), _tabs()],
+            children: [
+              _homeArtistsCard(context: context),
+             _tabs(),
+             SizedBox(
+                height: 210,
+               child: TabBarView(
+                controller: _tabContrllere,
+                children:  [ 
+               
+                  NewSongWidget(),
+                  
+                  Container(),
+                  Container(),
+                  Container()
+                  
+               ]),
+             )
+             ],
           ),
         ),
       ),
@@ -55,7 +73,6 @@ class _HomePageState extends State<HomePage>
 
   Widget _homeArtistsCard({BuildContext? context}) {
     return SizedBox(
-
       height: 140,
       width: double.infinity,
       child: Stack(
@@ -92,14 +109,11 @@ class _HomePageState extends State<HomePage>
 
   Widget _tabs() {
     return TabBar(
-      tabAlignment:TabAlignment.start ,
+        tabAlignment: TabAlignment.start,
         dividerHeight: 0,
         // padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         isScrollable: true,
-      
         indicatorSize: TabBarIndicatorSize.label,
-
-
         indicatorWeight: 4,
         controller: _tabContrllere,
         indicatorColor: AppColors.primary,
@@ -131,7 +145,6 @@ class _HomePageState extends State<HomePage>
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
           ),
-     
         ]);
   }
 }

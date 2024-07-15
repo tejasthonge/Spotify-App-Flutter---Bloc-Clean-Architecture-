@@ -9,7 +9,7 @@ import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/data/models/auth/create_user_req.dart';
 import 'package:spotify/domain/usecases/auth/signup_usecase.dart';
 import 'package:spotify/presentation/auth/pages/login.dart';
-import 'package:spotify/presentation/root/pages/home.dart';
+import 'package:spotify/presentation/home/pages/home.dart';
 import 'package:spotify/service_locator.dart';
 
 class SignUpPage extends StatelessWidget {
