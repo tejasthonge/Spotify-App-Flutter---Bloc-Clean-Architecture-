@@ -5,7 +5,8 @@ import 'package:spotify/core/configs/theme/app_colors.dart';
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   final Widget? title;
-  const BasicAppBar({super.key, this.title});
+  final bool? hideBack ;
+  const BasicAppBar({super.key, this.title,this.hideBack,});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,9 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget{
        Colors.transparent,
        centerTitle: true,
        title: title!=null ? title : null,
-      leading: IconButton(
+      leading:
+       hideBack == true? null :
+       IconButton(
         onPressed: () {
           Navigator.of(context).pop();
         },

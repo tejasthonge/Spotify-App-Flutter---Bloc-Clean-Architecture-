@@ -10,7 +10,7 @@ import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/data/models/auth/sigin_user_req.dart';
 import 'package:spotify/domain/usecases/auth/signin_usecase.dart';
 import 'package:spotify/presentation/auth/pages/signup.dart';
-import 'package:spotify/presentation/root/pages/root.dart';
+import 'package:spotify/presentation/root/pages/home.dart';
 import 'package:spotify/service_locator.dart';
 
 class LoginPage extends StatelessWidget {
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                    EasyLoading.showSuccess("Welcome back\n Jay Shree Ram");
                   EasyLoading.dismiss();
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_)=>const RootPage())
+                  MaterialPageRoute(builder: (_)=>const HomePage())
                   , (route) => false);
              });
             }, title: "Sign In"),
