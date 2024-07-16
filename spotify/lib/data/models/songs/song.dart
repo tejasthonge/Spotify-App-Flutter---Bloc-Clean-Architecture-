@@ -24,7 +24,7 @@ class SongModel {
 
     title =data["title"] ?? "";
     artist = data["artist"] ?? "";
-    durartion = data["durartion"]  ?? 0.0;
+    durartion = data['durartion']  ?? 0;
     releseDate = DateTime.parse(data["release_date"]?? "0001-01-01");
     cover =data["cover"] ?? "";
     song = data["song"] ?? "";

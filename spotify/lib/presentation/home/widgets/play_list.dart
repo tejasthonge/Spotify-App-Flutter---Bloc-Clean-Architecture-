@@ -57,10 +57,11 @@ class PalyListWidget extends StatelessWidget {
           child: Row( 
             children: [ 
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Container(
                   height: 40,
                   width: 40,
+
                   // transform: Matrix4.translationValues(10, 10, 0),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -77,19 +78,30 @@ class PalyListWidget extends StatelessWidget {
                       size: 24,
                     ),
                   )),),
-                
+                const SizedBox(width: 10,),
               Expanded(
-                flex: 6,
+                flex: 5,
                 child: SizedBox( 
                   height: 50,
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [ 
                       Text(
-                        plalylist[index].title
+                        plalylist[index].title,
+                         style: TextStyle(
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
+
                       ),
                        Text(
-                        plalylist[index].artist
+                        plalylist[index].artist,
+                         style: TextStyle(
+                    color: context.isDarkMode
+                        ? Colors.white54
+                        : Colors.black.withOpacity(.5),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
                       ),
                       
       
@@ -99,15 +111,18 @@ class PalyListWidget extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(
-                  "${plalylist[index].durartion}"
+                  plalylist[index].durartion.toString().replaceAll(".", ": ")
                   // ""
                   )),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: IconButton( 
                   onPressed: (){},
                   icon: Icon( 
-                    Icons.favorite
+                    Icons.favorite_rounded,
+                     color: context.isDarkMode
+                          ? Color(0xff959595)
+                          : AppColors.darkGrey,
                   ),
                 )),
       
