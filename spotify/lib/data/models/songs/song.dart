@@ -7,12 +7,17 @@ class SongModel {
    String? artist;
    double? durartion;
    DateTime? releseDate;
+   String? cover;
+   String? song;
 
   SongModel(
       {required this.title,
       required this.artist,
       required this.durartion,
-      required this.releseDate});
+      required this.releseDate,
+      required this.cover,
+      required this.song
+      });
 
 
   SongModel.fromJSON(Map<String,dynamic> data){
@@ -21,6 +26,9 @@ class SongModel {
     artist = data["artist"] ?? "";
     durartion = data["duration"]?? 0.0;
     releseDate = DateTime.parse(data["release_date"]?? "0001-01-01");
+    cover =data["cover"] ?? "";
+    song = data["song"] ?? "";
+
     
 
   }
@@ -43,6 +51,8 @@ class SongModel {
       artist: artist!,
       durartion: durartion!,
       releseDate: releseDate!,
+      cover: cover!,
+      song: song!
     );
   }
  }

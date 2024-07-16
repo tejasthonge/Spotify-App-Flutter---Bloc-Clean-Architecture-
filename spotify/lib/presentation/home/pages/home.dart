@@ -51,11 +51,11 @@ class _HomePageState extends State<HomePage>
               _homeArtistsCard(context: context),
              _tabs(),
              SizedBox(
-                height: 210,
+                height: 240,
                child: TabBarView(
                 controller: _tabContrllere,
                 children:  [ 
-               
+                  
                   NewSongWidget(),
                   
                   Container(),
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage>
     return TabBar(
         tabAlignment: TabAlignment.start,
         dividerHeight: 0,
-        // padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+        padding: EdgeInsets.only(bottom: 20),
         isScrollable: true,
         indicatorSize: TabBarIndicatorSize.label,
         indicatorWeight: 4,

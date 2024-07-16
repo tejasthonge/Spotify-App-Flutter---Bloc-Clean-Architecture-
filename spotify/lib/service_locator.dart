@@ -9,7 +9,8 @@ import 'package:spotify/domain/repository/auth/auth.dart';
 import 'package:spotify/domain/repository/songs/songs.dart';
 import 'package:spotify/domain/usecases/auth/signin_usecase.dart';
 import 'package:spotify/domain/usecases/auth/signup_usecase.dart';
-import 'package:spotify/domain/usecases/songs/songs_usecase.dart';
+import 'package:spotify/domain/usecases/songs/get_new_songs_usecase.dart';
+import 'package:spotify/domain/usecases/songs/get_play_list_usecase.dart';
 
 final sl = GetIt.instance;  //this is global and we use all over the app used for check pub.dev 
 
@@ -41,6 +42,9 @@ Future<void> registerDependencies()async{
   );
    sl.registerSingleton<GetNewSongsUsecase>(
     GetNewSongsUsecase()
+  );
+   sl.registerSingleton<GetPlayListUsecase>(
+    GetPlayListUsecase()
   );
 
 
