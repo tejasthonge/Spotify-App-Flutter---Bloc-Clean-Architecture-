@@ -5,7 +5,7 @@ import 'package:spotify/domain/entities/songs/songs.dart';
 class SongModel {
    String? title;
    String? artist;
-   double? durartion;
+   num? durartion;
    DateTime? releseDate;
    String? cover;
    String? song;
@@ -24,7 +24,7 @@ class SongModel {
 
     title =data["title"] ?? "";
     artist = data["artist"] ?? "";
-    durartion = data["duration"]?? 0.0;
+    durartion = data["durartion"]  ?? 0.0;
     releseDate = DateTime.parse(data["release_date"]?? "0001-01-01");
     cover =data["cover"] ?? "";
     song = data["song"] ?? "";

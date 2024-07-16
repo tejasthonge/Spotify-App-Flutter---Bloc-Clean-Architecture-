@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,6 @@ class NewSongWidget extends StatelessWidget {
       create: (_) => NewSongCubit()..getNEwSongs(),
       child: SizedBox(
           height: 240,
-          
           child: BlocBuilder<NewSongCubit, NewSongState>(
             builder: (context, state) {
               if (state is NewSongsLoading) {
@@ -29,7 +27,7 @@ class NewSongWidget extends StatelessWidget {
                 ));
               }
               if (state is NewSongsLoaded) {
-                return _songs(songs: state.songs,context: context);
+                return _songs(songs: state.songs, context: context);
               }
               return Container();
             },
@@ -37,36 +35,31 @@ class NewSongWidget extends StatelessWidget {
     );
   }
 
-  Widget _songs({required List<SongEntity> songs ,required BuildContext context}) {
+  Widget _songs(
+      {required List<SongEntity> songs, required BuildContext context}) {
     return ListView.separated(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _coverPhoto(song: songs[index],context: context),
+              _coverPhoto(song: songs[index], context: context),
               const SizedBox(height: 4),
               Text(
                 songs[index].title,
                 style: TextStyle(
-                  
-                  color: context.isDarkMode?
-                    Colors.white: 
-                    Colors.black
-                  ,
-
-
-                  fontSize: 13, fontWeight: FontWeight.bold),
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 songs[index].artist,
-
                 style: TextStyle(
-                  color: context.isDarkMode?
-                    Colors.white54: 
-                    Colors.black.withOpacity(.5)
-                  ,
-                  fontSize: 13, fontWeight: FontWeight.w500),
+                    color: context.isDarkMode
+                        ? Colors.white54
+                        : Colors.black.withOpacity(.5),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           );
@@ -75,61 +68,40 @@ class NewSongWidget extends StatelessWidget {
         itemCount: songs.length);
   }
 
-  Widget _coverPhoto({required SongEntity song ,required BuildContext context}) {
+  Widget _coverPhoto(
+      {required SongEntity song, required BuildContext context}) {
     return SizedBox(
-          height: 190,
-
+      height: 190,
       child: Stack(
         children: [
           Container(
             height: 180,
             width: 147,
-           
             alignment: Alignment.bottomRight,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
-                  
-                    fit: BoxFit.cover, image:
-                    
-                     NetworkImage(song.cover!))
-                    
-                    
-                    ),
-                     child: Container( 
-                  height: 40,
-                  width: 40,
-                  transform: Matrix4.translationValues(10, 10, 0),
-                  decoration:  BoxDecoration( 
-                    
+                    fit: BoxFit.cover, image: NetworkImage(song.cover!))),
+            child: Container(
+                height: 40,
+                width: 40,
+                transform: Matrix4.translationValues(10, 10, 0),
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
-
-
-                    color:
-                      context.isDarkMode?
-                      AppColors.darkGrey:
-                     Color(0xffE6E6E6)
-      
-                  ),
-                  child:IconButton( 
-                    onPressed: (){
-                      
-                    },
-                    icon:   Icon( 
+                    color: context.isDarkMode
+                        ? AppColors.darkGrey
+                        : Color(0xffE6E6E6)),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
                     Icons.play_arrow_rounded,
-                  color:
-                      context.isDarkMode?
-                      Color(0xff959595):
-                     AppColors.darkGrey,
+                    color: context.isDarkMode
+                        ? Color(0xff959595)
+                        : AppColors.darkGrey,
                     size: 24,
-      
                   ),
-                  )
-      
-                ),
-                    
+                )),
           ),
-         
         ],
       ),
     );

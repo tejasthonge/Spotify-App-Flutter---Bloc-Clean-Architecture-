@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/helpers/is_dark_mode.dart';
@@ -9,7 +8,7 @@ import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/assets/app_vector.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/presentation/home/widgets/new_songs.dart';
-
+import 'package:spotify/presentation/home/widgets/play_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,22 +48,33 @@ class _HomePageState extends State<HomePage>
             // crossAxisAlignment: ,
             children: [
               _homeArtistsCard(context: context),
-             _tabs(),
-             SizedBox(
+              _tabs(),
+              SizedBox(
                 height: 240,
-               child: TabBarView(
-                controller: _tabContrllere,
-                children:  [ 
-                  
-                  NewSongWidget(),
-                  
+                child: TabBarView(controller: _tabContrllere, children: [
+                  const NewSongWidget(),
                   Container(),
                   Container(),
                   Container()
-                  
-               ]),
-             )
-             ],
+                ]),
+              ),
+              const SizedBox(
+                height: 40,
+                child: Row(
+                  children: [
+                    Text(
+                      "Playlist",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 450,
+                child: PalyListWidget(),
+              )
+            ],
           ),
         ),
       ),
@@ -111,7 +121,7 @@ class _HomePageState extends State<HomePage>
     return TabBar(
         tabAlignment: TabAlignment.start,
         dividerHeight: 0,
-        padding: EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(bottom: 20),
         isScrollable: true,
         indicatorSize: TabBarIndicatorSize.label,
         indicatorWeight: 4,

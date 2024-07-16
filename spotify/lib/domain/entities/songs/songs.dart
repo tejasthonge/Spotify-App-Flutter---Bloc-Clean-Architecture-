@@ -1,7 +1,7 @@
 class SongEntity {
   final String title;
   final String artist;
-  final double durartion;
+  final num durartion;
   final DateTime releseDate;
   final String? cover;
    final String? song;
