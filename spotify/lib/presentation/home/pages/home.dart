@@ -58,14 +58,19 @@ class _HomePageState extends State<HomePage>
                   Container()
                 ]),
               ),
-              const SizedBox(
+               Container(
+                margin: EdgeInsets.only(right: 12),
                 height: 40,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Playlist",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      "see more"
                     ),
                   ],
                 ),

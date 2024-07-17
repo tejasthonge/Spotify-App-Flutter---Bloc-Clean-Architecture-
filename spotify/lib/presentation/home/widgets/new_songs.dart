@@ -8,6 +8,7 @@ import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/domain/entities/songs/songs.dart';
 import 'package:spotify/presentation/home/bloc/new_songs_cubit.dart';
 import 'package:spotify/presentation/home/bloc/new_songs_state.dart';
+import 'package:spotify/presentation/songs_player/pages/song_player.dart';
 
 class NewSongWidget extends StatelessWidget {
   const NewSongWidget({super.key});
@@ -40,28 +41,36 @@ class NewSongWidget extends StatelessWidget {
     return ListView.separated(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _coverPhoto(song: songs[index], context: context),
-              const SizedBox(height: 4),
-              Text(
-                songs[index].title,
-                style: TextStyle(
-                    color: context.isDarkMode ? Colors.white : Colors.black,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                songs[index].artist,
-                style: TextStyle(
-                    color: context.isDarkMode
-                        ? Colors.white54
-                        : Colors.black.withOpacity(.5),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
+          return GestureDetector(
+            onTap: (){
+
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) =>  SongPlayerPage(song:songs[index] ,)));
+            },
+            
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _coverPhoto(song: songs[index], context: context),
+                const SizedBox(height: 4),
+                Text(
+                  songs[index].title,
+                  style: TextStyle(
+                      color: context.isDarkMode ? Colors.white : Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  songs[index].artist,
+                  style: TextStyle(
+                      color: context.isDarkMode
+                          ? Colors.white54
+                          : Colors.black.withOpacity(.5),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           );
         },
         separatorBuilder: ((context, index) => const SizedBox(width: 14)),
@@ -92,7 +101,10 @@ class NewSongWidget extends StatelessWidget {
                         ? AppColors.darkGrey
                         : Color(0xffE6E6E6)),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) =>  SongPlayerPage(song: song,)));
+                  },
                   icon: Icon(
                     Icons.play_arrow_rounded,
                     color: context.isDarkMode
